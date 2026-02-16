@@ -74,4 +74,5 @@ $auth_token  = "YOUR_TWILIO_AUTH_TOKEN";
 ```
 ## Project Screenshot
 
-(task-manager.png)
+![Project Screenshot](task-manager.png)
+
