@@ -1,33 +1,44 @@
-# Pyrox Task Manager – Full Stack CRUD Application
+# Pyrox Task Manager with WhatsApp Reminder
 
-## Live Deployment
+A full-stack Task Management application built using **React, PHP, MySQL**, and **Twilio WhatsApp API**.
+
+This project supports complete CRUD operations and sends automated WhatsApp reminders using a Cron job.
+
+---
+
+## Live Project
 
 🔗 https://pyroxytask.infinityfreeapp.com/
 
 ---
 
-## Project Overview
+## Tech Stack
 
-This is a full-stack Task Management Web Application built using:
+### Frontend
 
-- **Frontend:** React (Vite)
-- **Backend:** PHP (REST APIs)
-- **Database:** MySQL
-- **Notification Service:** Twilio WhatsApp API
-- **Hosting:** InfinityFree
+- React (Vite)
+- Custom CSS (Dark Theme)
 
-The application supports full CRUD operations and includes an automated daily WhatsApp notification system.
+### Backend
+
+- PHP (REST APIs)
+- MySQL Database
+- cURL (Twilio API integration)
+
+### External Services
+
+- Twilio WhatsApp Sandbox
+- Cron-job.org (for automated scheduling)
 
 ---
 
 ## Features
 
-Add Tasks  
- View Tasks  
- Update Tasks  
- Delete Tasks  
- Store Data in MySQL Database  
- Daily WhatsApp Notification System
+- 🔐 User Registration & Login (Password Hashing)
+- 📋 Create, Read, Update, Delete Tasks
+- ⏰ Set Reminder Time for Tasks
+- 📱 WhatsApp Reminder Notification
+- 🔁 Cron Job Automation (runs every minute)
 
 ---
 
@@ -36,43 +47,123 @@ Add Tasks
 ```
 pyrox-task-project/
 │
-├── frontend/      # React source code
-├── backend/       # PHP API files
-├── database/      # SQL file for database setup
+├── frontend/        # React source code
+├── backend/         # PHP API files
+├── database/        # SQL file for setup
 └── README.md
 ```
 
 ---
 
-## Tech Stack
+## Database Setup
 
-- React (Vite)
-- PHP
-- MySQL
-- Twilio WhatsApp API
-- InfinityFree Hosting
+Import the SQL file inside the `database/` folder.
+
+Required tables:
+
+- users
+- tasks
+- notifications
 
 ---
 
-## Setup Instructions (Local)
+## Twilio Setup
 
-### 1️⃣ Database Setup
+1. Create a Twilio account
+2. Enable WhatsApp Sandbox
+3. Join sandbox using WhatsApp:
 
-- Import `database/task_db.sql` into MySQL.
-- Update database credentials inside `backend/db.php`.
+   ```
+   join personal-feature
+   ```
 
-### 2️⃣ Twilio Setup
+   Send to:
 
-- Create a Twilio account.
-- Enable WhatsApp Sandbox.
-- Replace credentials inside `send_notification.php`:
+   ```
+   +14155238886
+   ```
 
-```php
-$account_sid = "YOUR_TWILIO_ACCOUNT_SID";
-$auth_token  = "YOUR_TWILIO_AUTH_TOKEN";
+4. Add your credentials inside:
+   `send_notification.php`
+
+   ```
+   $account_sid = "YOUR_ACCOUNT_SID";
+   $auth_token  = "YOUR_AUTH_TOKEN";
+   ```
+
+---
+
+## Cron Job Setup
+
+1. Go to https://cron-job.org
+2. Create free account
+3. Add new cron job with URL:
 
 ```
-## Project Screenshot
+https://pyroxytask.infinityfreeapp.com/send_notification.php
+```
 
-![Project Screenshot](task-manager.png)
+4. Set interval to:
 
+```
+Every 1 minute
+```
+
+Now reminders will run automatically.
+
+---
+
+## How It Works
+
+1. User registers / logs in
+2. User creates task with reminder time
+3. Task saved in `tasks` table
+4. Reminder saved in `notifications` table
+5. Cron job runs every minute
+6. If time matches → Twilio sends WhatsApp message
+
+---
+
+## Security Features
+
+- Passwords hashed using `password_hash()`
+- Password verified using `password_verify()`
+- Prepared statements used for database queries
+- CORS enabled for frontend-backend communication
+
+---
+
+## Important Notes
+
+- Twilio Trial account sends messages only to verified numbers.
+- Server timezone set to `Asia/Kolkata`.
+- Reminder time must match server time.
+
+---
+
+## 👩‍💻 Developed By
+
+Arpita V
+
+---
+
+## Project Status
+
+✅ CRUD Completed  
+✅ Authentication Working  
+✅ WhatsApp Reminder Working  
+✅ Cron Automation Working  
+✅ Hosted Online
+
+---
+
+## Screenshots
+
+### Login Page
+
+![Signup Page](t1.png)
+![Login Page](t2.png)
+
+### 📋 Dashboard
+
+![Dashboard](t3.png)
